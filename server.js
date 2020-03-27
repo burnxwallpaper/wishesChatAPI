@@ -4,10 +4,22 @@ const io = require('socket.io')(http);
 const port = process.env.PORT || 4000;
 //db
 const mongoose = require('mongoose');
-const DB_URL = process.env.MONGODB_URI || "mongodb+srv://cheukheisiu:970204leo@eshopapi-m0cdc.mongodb.net/chatroomAPI?retryWrites=true&w=majority" || 'mongodb://localhost:27017/chatroomAPI'
+const DB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/chatroomAPI'
 const db = mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 const Account = require('./dbAPI/accountModel');
 const FdRoom = require('./dbAPI/fdRoomModel');
+
+
+app.use((req, res, next) => {
+  res.set({
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Credentials": "true"
+    //"Content-Type": "text/html"
+  })
+  next()
+})
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
