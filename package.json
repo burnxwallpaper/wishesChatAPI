@@ -1,0 +1,16 @@
+{
+  "name": "chatserverapi",
+  "version": "1.0.0",
+  "description": "for socketio project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "leo siu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6",
+    "socket.io": "^2.3.0"
+  }
+}
