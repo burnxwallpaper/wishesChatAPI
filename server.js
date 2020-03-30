@@ -267,6 +267,11 @@ io.on('connection', function (socket) {
 
   socket.on("createRoom", function (newRoomInfo) {
     let { roomID, username } = newRoomInfo
+    if (Object.keys(roomInfo).includes(roomID)) {
+      socket.emit('systemMsg', { msg: `Room name has been used, please change another one` })
+      console.log("repeated room")
+      return
+    }
     roomInfo[roomID] = [];
     roomHost[roomID] = username;
     io.emit('roomListUpdate', { roomInfo, roomHost });
@@ -406,7 +411,6 @@ io.on('connection', function (socket) {
       io.to(roomID).emit('roomInfo', { userList: roomInfo[roomID] });
       if (roomHost[roomID] === user.username) {
 
-
         //change host
         if (roomInfo[roomID].length > 0) {
           roomHost[roomID] = roomInfo[roomID][0]
@@ -442,6 +446,16 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     if (onlineUsers.hasOwnProperty(socket.uid)) {
       let user = { userID: socket.uid, username: onlineUsers[socket.uid] };
+      if (roomHost[roomID] === user.username) {
+
+        //change host
+        if (roomInfo[roomID].length > 0) {
+          roomHost[roomID] = roomInfo[roomID][0]
+        }
+        //delete room if no one
+        else { delete roomInfo[roomID] }
+
+      }
       //remove socket from socketlist
       for (i = 0; i < socketList.length; i++) {
         if (socketList[i].username === onlineUsers[socket.uid]) {
