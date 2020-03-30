@@ -23,16 +23,15 @@ const FdRoom = require('./dbAPI/fdRoomModel');
 })*/
 
 const cors = require('cors');
-const whitelist = ['http://localhost:3000', 'https://wisheschatroom.herokuapp.com'];
+const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com/', "https://wisheschatroom.herokuapp.com/login"];
 const corsOptions = {
   credentials: true, // This is important.
-  origin: "*"
-  /*(origin, callback) => {
+  origin: (origin, callback) => {
     if (whitelist.includes(origin))
       return callback(null, true)
 
     callback(new Error('Not allowed by CORS!'));
-  }*/
+  }
 }
 
 app.use(cors(corsOptions));
