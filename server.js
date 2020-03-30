@@ -13,7 +13,7 @@ const FdRoom = require('./dbAPI/fdRoomModel');
 app.use((req, res, next) => {
   res.set({
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+    "Access-Control-Allow-Methods": "*",
     "Access-Control-Allow-Headers": "*",
     "Access-Control-Allow-Credentials": "true"
     //"Content-Type": "text/html"
@@ -272,6 +272,7 @@ io.on('connection', function (socket) {
       console.log("repeated room")
       return
     }
+    socket.emit('systemMsg', { success: true })
     roomInfo[roomID] = [];
     roomHost[roomID] = username;
     io.emit('roomListUpdate', { roomInfo, roomHost });
