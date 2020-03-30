@@ -11,7 +11,7 @@ const Account = require('./dbAPI/accountModel');
 const FdRoom = require('./dbAPI/fdRoomModel');
 
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.set({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "*",
@@ -20,7 +20,21 @@ app.use((req, res, next) => {
     //"Content-Type": "text/html"
   })
   next()
-})
+})*/
+
+const cors = require('cors');
+const whitelist = ['http://localhost:3000', 'https://wisheschatroom.herokuapp.com'];
+const corsOptions = {
+  credentials: true, // This is important.
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin))
+      return callback(null, true)
+
+    callback(new Error('Not allowed by CORS!'));
+  }
+}
+
+app.use(cors(corsOptions));
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
