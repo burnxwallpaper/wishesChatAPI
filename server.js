@@ -21,8 +21,7 @@ app.use((req, res, next) => {
   next()
 })
 
-
-const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
+/*const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
 const corsOptions = {
   credentials: true, // This is important.
   origin: (origin, callback) => {
@@ -31,9 +30,7 @@ const corsOptions = {
 
     callback(new Error('Not allowed by CORS!'));
   }
-}
-
-
+}*/
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
