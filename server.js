@@ -469,15 +469,15 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     if (onlineUsers.hasOwnProperty(socket.uid)) {
       let user = { userID: socket.uid, username: onlineUsers[socket.uid] };
-      let roomID = socket.roomID;
-      if (roomHost[roomID] === user.username) {
+      let roomid = socket.roomID;
+      if (roomHost[roomid] === user.username) {
 
         //change host
-        if (roomInfo[roomID].length > 0) {
-          roomHost[roomID] = roomInfo[roomID][0]
+        if (roomInfo[roomid].length > 0) {
+          roomHost[roomid] = roomInfo[roomid][0]
         }
         //delete room if no one
-        else { delete roomInfo[roomID] }
+        else { delete roomInfo[roomid] }
 
       }
       //remove socket from socketlist
