@@ -9,6 +9,13 @@ const db = mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology:
 const Account = require('./dbAPI/accountModel');
 const FdRoom = require('./dbAPI/fdRoomModel');
 
+io.origins((origin, callback) => {
+  if (origin !== 'https://wisheschatroom.herokuapp.com') {
+    console.log("'origin not allowed'")
+    return callback('origin not allowed', false);
+  }
+  callback(null, true);
+});
 
 app.use((req, res, next) => {
   res.set({
@@ -21,7 +28,7 @@ app.use((req, res, next) => {
   next()
 })
 
-const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
+/*const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
 const corsOptions = {
   credentials: true, // This is important.
   origin: (origin, callback) => {
@@ -30,8 +37,10 @@ const corsOptions = {
 
     callback(new Error('Not allowed by CORS!'));
   }
-}
-app.use(cors(corsOptions));
+}*/
+//app.use(cors(corsOptions));
+
+
 //test
 app.get('/', function (req, res) {
   res.send('Hello World!');
