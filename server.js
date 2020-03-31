@@ -1,5 +1,5 @@
 const app = require('express')();
-//const cors = require('cors');
+const cors = require('cors');
 const port = process.env.PORT || 4000;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { origins: '*:*' });
@@ -9,19 +9,19 @@ const db = mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology:
 const Account = require('./dbAPI/accountModel');
 const FdRoom = require('./dbAPI/fdRoomModel');
 
-/*app.use(cors({ origin: '*' }));
+app.use(cors(corsOptions));
 app.use((req, res, next) => {
   res.set({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": " GET,PUT,POST,DELETE,OPTIONS",
     "Access-Control-Allow-Headers": "*",
-    //"Access-Control-Allow-Credentials": "true"
-    //"Content-Type": "text/html"
+    "Access-Control-Allow-Credentials": "true",
+    "Content-Type": "text/html"
   })
   next()
-})*/
+})
 
-/*const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
+const whitelist = ['http://localhost:3000', 'wisheschatroomapi.herokuapp.com', "wisheschatroom.herokuapp.com"];
 const corsOptions = {
   credentials: true, // This is important.
   origin: (origin, callback) => {
@@ -30,7 +30,7 @@ const corsOptions = {
 
     callback(new Error('Not allowed by CORS!'));
   }
-}*/
+}
 
 //test
 app.get('/', function (req, res) {
