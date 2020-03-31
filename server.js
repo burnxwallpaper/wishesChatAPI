@@ -10,10 +10,11 @@ const Account = require('./dbAPI/accountModel');
 const FdRoom = require('./dbAPI/fdRoomModel');
 
 io.origins((origin, callback) => {
-  if (origin !== 'https://wisheschatroom.herokuapp.com*') {
+  /*if (origin !== 'https://wisheschatroom.herokuapp.com*') {
     console.log("'origin not allowed'")
     return callback('origin not allowed', false);
-  }
+  }*/
+  console.log(origin)
   callback(null, true);
 });
 
