@@ -1,5 +1,5 @@
 const app = require('express')();
-
+const cors = require('cors');
 const port = process.env.PORT || 4000;
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   next()
 })
 
-/*const cors = require('cors');
+
 const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
 const corsOptions = {
   credentials: true, // This is important.
@@ -31,7 +31,7 @@ const corsOptions = {
 
     callback(new Error('Not allowed by CORS!'));
   }
-}*/
+}
 
 
 
