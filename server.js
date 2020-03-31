@@ -9,7 +9,7 @@ const db = mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology:
 const Account = require('./dbAPI/accountModel');
 const FdRoom = require('./dbAPI/fdRoomModel');
 
-app.use(cors(corsOptions));
+
 app.use((req, res, next) => {
   res.set({
     "Access-Control-Allow-Origin": "*",
@@ -31,7 +31,7 @@ const corsOptions = {
     callback(new Error('Not allowed by CORS!'));
   }
 }
-
+app.use(cors(corsOptions));
 //test
 app.get('/', function (req, res) {
   res.send('Hello World!');
