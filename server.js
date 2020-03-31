@@ -3,7 +3,7 @@ const app = require('express')();
 const port = process.env.PORT || 4000;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-io.set('origins', 'http://localhost:3000');
+io.set('origins', '*');
 const mongoose = require('mongoose');
 const DB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/chatroomAPI'
 const db = mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
