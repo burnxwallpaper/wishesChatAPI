@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   next()
 })
 
-const whitelist = ['http://localhost:3000', 'wisheschatroomapi.herokuapp.com', "wisheschatroom.herokuapp.com"];
+const whitelist = ['http://localhost:3000', 'https://wisheschatroomapi.herokuapp.com', "https://wisheschatroom.herokuapp.com"];
 const corsOptions = {
   credentials: true, // This is important.
   origin: (origin, callback) => {
