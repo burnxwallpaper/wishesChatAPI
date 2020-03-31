@@ -469,6 +469,7 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     if (onlineUsers.hasOwnProperty(socket.uid)) {
       let user = { userID: socket.uid, username: onlineUsers[socket.uid] };
+      let roomID = socket.roomID;
       if (roomHost[roomID] === user.username) {
 
         //change host
