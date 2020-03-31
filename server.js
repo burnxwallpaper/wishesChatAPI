@@ -15,8 +15,8 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": " GET,PUT,POST,DELETE,OPTIONS",
     "Access-Control-Allow-Headers": "*",
-    "Access-Control-Allow-Credentials": "true",
-    "Content-Type": "text/html"
+    //"Access-Control-Allow-Credentials": "true",
+    //"Content-Type": "text/html"
   })
   next()
 })
