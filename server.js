@@ -207,6 +207,7 @@ io.on('connection', function (socket) {
     await FdRoom.findById(roomID, async (err, room) => {
       if (err) { console.log(err); return }
       let unreadCount = 0
+      if (!room) { return }
       for (let i = 0; i < room.msg.length; i++) {
         if ((room.msg[i].read !== true) && (room.msg[i].talker !== socket.username)) {
           unreadCount++
@@ -216,7 +217,7 @@ io.on('connection', function (socket) {
       room.markModified('msg');
       if (unreadCount > 0) {
         await room.save().then(async () => {
-          console.log("read done")
+          console.log("msg read")
           let msg = await findPrivateChatMsg(socket)
           socket.emit("chatRecordUpdate", { chatRecord: msg })
         })
