@@ -327,7 +327,7 @@ io.on('connection', function (socket) {
           socket.emit("systemMsg", { msg: `Friend request is sent to ${fdWantToAdd}!` })
         })
       } else {
-        socket.emit("systemMsg", { msg: `You request to ${fdWantToAdd} is sent before.` })
+        socket.emit("systemMsg", { msg: `Your request to ${fdWantToAdd} is pending.` })
       }
     })
 
