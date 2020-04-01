@@ -403,6 +403,7 @@ io.on('connection', function (socket) {
       user.iconImage = req.imageURL
       user.save().then(() => {
         console.log("updateSuccess");
+        socket.iconImage = req.imageURL
         socket.emit("updateAccountInfo", { accountInfo: user })
       })
     })
