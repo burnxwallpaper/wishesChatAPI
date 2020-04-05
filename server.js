@@ -442,7 +442,7 @@ io.on('connection', function (socket) {
 
   //creatAccount
   socket.on('createAccount', async function (accountInfo) {
-    if (accountInfo.username.length > 9 || !accountInfo.username.match(/[A-Za-z0-9]/)) {
+    if (!accountInfo.username.match(/^[A-Za-z0-9]{3,9}$/)) {
       socket.emit("createAccount", { success: false, msg: "Create account failed: invalid format" })
       console.log("invalid format,create fail")
       return
@@ -472,6 +472,7 @@ io.on('connection', function (socket) {
       fdRequestSent: [],
     })
     account.save().then(() => {
+      console.log("Create account success")
       socket.emit("createAccount", { success: true })
     })
   })
