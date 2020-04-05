@@ -442,6 +442,11 @@ io.on('connection', function (socket) {
 
   //creatAccount
   socket.on('createAccount', async function (accountInfo) {
+    if (accountInfo.username.length > 9 || !accountInfo.username.match(/[A-Za-z0-9]/)) {
+      socket.emit("createAccount", { success: false, msg: "Create account failed: invalid format" })
+      console.log("invalid format,create fail")
+      return
+    }
     async function validRepeatCheck() {
       let validCheck
       await Account.findOne({ username: accountInfo.username }, (err, user) => {
@@ -453,7 +458,7 @@ io.on('connection', function (socket) {
     }
     let valid = await validRepeatCheck()
     if (!valid) {
-      socket.emit("createAccount", { success: false })
+      socket.emit("createAccount", { success: false, msg: "Create account failed: Username has been used" })
       console.log("repeated user")
       return
     }
